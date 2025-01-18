@@ -34,7 +34,7 @@ services:
     image: mongo-express
     container_name: mongo_express
     ports:
-      - '8081:8081'
+      - "8081:8081"
     environment:
       ME_CONFIG_MONGODB_PORT: 27017
       ME_CONFIG_MONGODB_SERVER: mongo
@@ -42,7 +42,6 @@ services:
       ME_CONFIG_BASICAUTH_PASSWORD: admin
     networks:
       - app_network
-
 
   gateway-service:
     build:
@@ -119,4 +118,3 @@ services:
       - prometheus
     networks:
       - app_network
-

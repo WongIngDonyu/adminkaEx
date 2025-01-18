@@ -21,15 +21,11 @@
         <relativePath/>
     </parent>
 
-    <profiles>
-        <profile>
-            <id>exclude-api</id>
-            <modules>
-                <module>domain-service</module>
-                <module>gateway-service</module>
-            </modules>
-        </profile>
-    </profiles>
+    <modules>
+        <module>api</module>
+        <module>domain-service</module>
+        <module>gateway-service</module>
+    </modules>
 
     <dependencyManagement>
         <dependencies>
