@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package com.web.api.grpc;
+
+service DomainService {
+  rpc CreateGroup (CreateGroupRequest) returns (GroupResponse);
+  rpc GetGroup (GetGroupRequest) returns (GroupResponse);
+  rpc UpdateGroup (UpdateGroupRequest) returns (GroupResponse);
+  rpc DeleteGroup (DeleteGroupRequest) returns (DeleteGroupResponse);
+  rpc ListGroups (EmptyRequest) returns (ListGroupsResponse);
+}
+
+message CreateGroupRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message GetGroupRequest {
+  string id = 1;
+}
+
+message UpdateGroupRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message DeleteGroupRequest {
+  string id = 1;
+}
+
+message DeleteGroupResponse {
+  string id = 1;
+  string message = 2;
+}
+
+message ListGroupsResponse {
+  repeated GroupResponse groups = 1;
+}
+
+message EmptyRequest {}
+
+message GroupResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
