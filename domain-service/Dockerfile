@@ -1,24 +1,11 @@
-# Этап сборки
-FROM maven:3.9.5-eclipse-temurin-17 AS builder
+# Используем базовый образ OpenJDK для Java
+FROM openjdk:17-jdk-slim
+
+# Указываем рабочую директорию внутри контейнера
 WORKDIR /app
 
-# Копируем корневой POM и модуль
-COPY ../pom.xml ../
-COPY pom.xml .
-COPY src ./src
+# Копируем JAR-файл из этапа сборки
+COPY target/domain-service-0.0.1-SNAPSHOT.jar domain-service.jar
 
-# Собираем проект
-RUN mvn clean install -DskipTests
-
-# Этап запуска
-FROM eclipse-temurin:17-jdk-alpine
-WORKDIR /app
-
-# Копируем скомпилированный JAR из этапа сборки
-COPY --from=builder /app/target/domain-service-0.0.1-SNAPSHOT.jar app.jar
-
-# Открываем порт приложения
-EXPOSE 8083
-
-# Команда для запуска приложения
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Указываем команду для запуска приложения
+ENTRYPOINT ["java", "-jar", "domain-service.jar"]
